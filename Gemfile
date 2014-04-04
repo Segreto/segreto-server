@@ -1,5 +1,15 @@
 source 'https://rubygems.org'
 
+# Testing using RSpec
+group :test, :development do
+  gem 'rspec'
+end
+
+# Using pry ruby repl when dev
+group :development do
+  gem 'pry'
+end
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.4'
 
