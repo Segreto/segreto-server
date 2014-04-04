@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.4'
 
 gem 'sqlite3'
-gem 'jbuilder', '~> 1.2'
 
 # Testing using RSpec
 group :test, :development do
