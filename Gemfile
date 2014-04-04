@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Testing using RSpec
 group :test, :development do
-  gem 'rspec'
+  gem 'rspec-rails'
 end
 
 # Using pry ruby repl when dev
