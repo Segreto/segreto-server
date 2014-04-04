@@ -1,6 +1,12 @@
 require 'spec_helper'
 describe User do
-  before { @user = User.new(username:"joshcox", email:"joshcox@indiana.edu") }
+  before do
+    @user = User.new(
+      username: "joshcox",
+      email: "joshcox@indiana.edu",
+      name: "Josh Cox"
+    )
+  end
 
   subject { @user }
 
@@ -24,7 +30,7 @@ describe User do
     it { should_not be_valid }
   end
 
-  describe "when usernmae is too long" do
+  describe "when username is too long" do
     before { @user.username = "a" * 25 }
     it { should_not be_valid }
   end
@@ -47,5 +53,10 @@ describe User do
         expect(@user).to be_valid
       end
     end
+  end
+
+  describe "when name is too long" do
+    before { @user.name = "a" * 101 }
+    it { should_not be_valid }
   end
 end
