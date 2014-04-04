@@ -23,4 +23,24 @@ describe User do
 
     it { should_not be_valid }
   end
+
+  describe "when email format is invalid" do
+    it "should be invalid" do
+      invalid_emails = %w[mdewitt josh.cox.com mike@dewitt wat@mike_josh.com]
+      invalid_emails.each do |email|
+        @user.email = email
+        expect(@user).not_to be_valid
+      end
+    end
+  end
+
+  describe "when email format is valid" do
+    it "should be valid" do
+      valid_emails = %w[josh@mike.com josh+mike@beast.com josh@COX.coM]
+      valid_emails.each do |email|
+        @user.email = email
+        expect(@user).to be_valid
+      end
+    end
+  end
 end
