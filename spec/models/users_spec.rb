@@ -24,6 +24,11 @@ describe User do
     it { should_not be_valid }
   end
 
+  describe "when usernmae is too long" do
+    before { @user.username = "a" * 25 }
+    it { should_not be_valid }
+  end
+
   describe "when email format is invalid" do
     it "should be invalid" do
       invalid_emails = %w[mdewitt josh.cox.com mike@dewitt wat@mike_josh.com]
