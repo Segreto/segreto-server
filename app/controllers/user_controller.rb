@@ -8,17 +8,12 @@ class UserController < ApplicationController
 
   # create(username, password&/confirm, email, name)
   def create
-    @new_user = 
-      User.new(
-        username: params[:username],
-        password: params[:password],
-        password_confirmation: params[:password_confirmation],
-        email: params[:email],
-        name: params[:name]
-      )
-
-    @new_user.save
-    render json: @new_user, status: :created 
+    if @user = User.create(user_params)
+      @user.create_token
+      render json: @user, status: :created 
+    else
+      fail_validation
+    end
   end
 
   # signin(username, password) -> token
@@ -55,8 +50,18 @@ class UserController < ApplicationController
   # auth(username, token)
   def auth
     @user = User.find_by username: params[:username]
-    if @user.remember_token != params[:remember_token]
+    if @user.remember_token && (@user.remember_token != params[:remember_token])
       render json: {}, status: :forbidden
     end
+  end
+
+  def user_params
+    params.permit(:username, :password, :password_confirmation, :email, :name)
+  end
+
+  def fail_validation
+    render json: { error: 'Failed validations',
+                   validation_errors: @user.errors.messages },
+           status: :bad_request
   end
 end
