@@ -2,8 +2,8 @@ SegretoServer::Application.routes.draw do
   constraints format: 'json' do
     get    'user'         => 'user#show',    as: :user
     post   'user'         => 'user#create',  as: :user_create
-    post   'user/signin'  => 'user#signin',  as: :user_signin
-    post   'user/signout' => 'user#signout', as: :user_signout
+    get    'user/signin'  => 'user#signin',  as: :user_signin
+    get    'user/signout' => 'user#signout', as: :user_signout
     patch  'user/update'  => 'user#update',  as: :user_update
     put    'user/update'  => 'user#update'
     delete 'user'         => 'user#destroy', as: :user_delete

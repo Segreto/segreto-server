@@ -16,7 +16,13 @@ class User < ActiveRecord::Base
   has_secure_password
 
   def create_token
-    self.update(remember_token: SecureRandom.urlsafe_base64)
+    unless remember_token
+      update_attribute(:remember_token, SecureRandom.urlsafe_base64)
+    end
+  end
+
+  def greet
+    name || username
   end
 
   def as_json options={}
