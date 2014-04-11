@@ -36,7 +36,11 @@ class UserController < ApplicationController
 
   # update(username, attr*, val*)
   def update
-    
+    if @user.update(user_params)
+      render json: @user, status: :accepted
+    else
+      fail_validation
+    end
   end
 
   # destroy(username, password, token)
