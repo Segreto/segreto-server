@@ -13,4 +13,5 @@ end
 # Using pry ruby repl when dev
 group :development do
   gem 'pry'
+  gem 'pry-rails'
 end
