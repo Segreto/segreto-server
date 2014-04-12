@@ -4,6 +4,7 @@ gem 'rails', '4.0.4'
 
 gem 'sqlite3'
 gem 'bcrypt'
+gem 'attr_encryptor'
 
 # Testing using RSpec
 group :test, :development do
