@@ -6,7 +6,7 @@ repository, build its dependencies with `bundle install`, and run the server
 with `SEGRETO_SECRET_KEY=<your_key_here> rails server`. If you wish to modify 
 the source or run a permanent instance of the server, we recommend storing your 
 key variable in a `.env` file in the root of this repo and sourcing the file 
-before each run with `export \`cat .env\``.
+before each run with ``export `cat .env` ``.
 
 ## API
 
