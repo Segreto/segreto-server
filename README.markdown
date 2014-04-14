@@ -8,6 +8,13 @@ the source or run a permanent instance of the server, we recommend storing your
 key variable in a `.env` file in the root of this repo and sourcing the file 
 before each run with ``export `cat .env` ``.
 
+## Contents
+
+  * [API](#api)
+    * [User operations](#user-operations)
+    * [Secret operations](#secret-operations)
+  * [Development](#development)
+
 ## API
 
 The Segreto API is fairly simple, allowing only a few basic operations on the 
@@ -153,3 +160,26 @@ are as follows:
     `DELETE /secret/:key?username=<username>&remember_token=<token>`
 
     Permanently delete's the user's secret matching the given key.
+
+## Development
+
+If you want to modify the Segreto server source code, first make sure that you 
+have Ruby 2.1.1 and the Bundle gem installed. If you don't already use a version 
+manager, we recommend [rbenv](https://github.com/sstephenson/rbenv).
+
+With that done, run the following:
+
+    $ git clone https://github.com/segreto/segreto-server.git
+    $ cd segreto-server/
+    $ bundle install
+
+and finally start the server with
+
+    $ rails server
+
+or run the test suite with
+
+    $ rake spec
+
+If you want to contribute any of your changes, feel free to fork this repo and 
+submit pull-requests!
