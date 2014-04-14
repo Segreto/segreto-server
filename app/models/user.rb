@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  has_many :secrets
+
   def create_token
     unless remember_token
       update_attribute(:remember_token, SecureRandom.urlsafe_base64)

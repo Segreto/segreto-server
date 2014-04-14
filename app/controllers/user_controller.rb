@@ -11,11 +11,10 @@ class UserController < ApplicationController
     @user = User.create(user_params)
     if @user.valid?
       @user.create_token
-      render json: @user.as_json
-                     .reverse_merge(message: "Welcome, #{@user.greet}!"),
+      render json: { message: "Welcome, #{@user.greet}!" }.merge(@user.as_json),
              status: :created 
     else
-      fail_validation
+      fail_validation @user
     end
   end
 
@@ -43,7 +42,7 @@ class UserController < ApplicationController
     if @user.update(user_params)
       render json: @user, status: :accepted
     else
-      fail_validation
+      fail_validation @user
     end
   end
 
@@ -55,28 +54,7 @@ class UserController < ApplicationController
 
   private
 
-  # auth(username, token)
-  def auth
-    fail_auth unless params[:username] && params[:remember_token]
-    @user = User.find_by username: params[:username]
-    if !@user ||
-       !@user.remember_token ||
-       (@user.remember_token != params[:remember_token])
-      fail_auth
-    end
-  end
-
-  def fail_auth
-    render json: { error: "invalid credentials"}, status: :forbidden
-  end
-
   def user_params
     params.permit(:username, :password, :password_confirmation, :email, :name)
-  end
-
-  def fail_validation
-    render json: { error: 'Failed validations',
-                   validation_errors: @user.errors.messages },
-           status: :bad_request
   end
 end

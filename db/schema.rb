@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408002322) do
+ActiveRecord::Schema.define(version: 20140412020452) do
+
+  create_table "secrets", force: true do |t|
+    t.integer  "user_id"
+    t.string   "encrypted_key"
+    t.string   "encrypted_key_salt"
+    t.string   "encrypted_key_iv"
+    t.string   "encrypted_value"
+    t.string   "encrypted_value_salt"
+    t.string   "encrypted_value_iv"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "username"
