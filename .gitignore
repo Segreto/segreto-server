@@ -21,3 +21,6 @@
 
 # Ignore env file
 .env
+
+# Ignore secret_token.rb
+config/initializers/secret_token.rb
