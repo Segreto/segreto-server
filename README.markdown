@@ -133,9 +133,9 @@ are as follows:
     collection of secrets.
 
     Both the key and value are to be arbitrary strings and will be encrypted at 
-    rest in the Segreto database^[We currently use 
+    rest in the Segreto database (We currently use 
     [attr_encryptor](https://github.com/danpal/attr_encryptor) for field 
-    encryption.]. For additional security, the official client will also encrypt 
+    encryption.) For additional security, the official client will also encrypt 
     the value on the client side with a private key, making the stored values 
     entirely unknown to the server.
 
