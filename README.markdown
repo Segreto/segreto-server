@@ -16,7 +16,7 @@ are as follows:
 
 ### User operations
 
-  * `POST /user`
+  * Create: `POST /user`
 
     POST body:
 
@@ -48,7 +48,7 @@ are as follows:
     If the request fails for some reason, the server will respond with a message 
     indicating the reason and any further information it can provide.
 
-  * `GET /user/signin?username=<username>&password=<password>`
+  * Login: `GET /user/signin?username=<username>&password=<password>`
 
     If the password is correct for the given username, then the server logs the 
     user in (if they were not already so) and responds with a greeting and their
@@ -62,9 +62,13 @@ are as follows:
     Authentication failure will result in a message indicating that the supplied 
     credentials were invalid.
 
-  * `GET /user/signout?username=<username>&remember_token=<token>`
+    The `remember_token` should be retained by the client and used along with 
+    the `username` for authenticating future requests. The current token can be 
+    invalidated by making a signout request.
 
-  * `GET /user?username=<username>&remember_token=<token>`
+  * Logout: `GET /user/signout?username=<username>&remember_token=<token>`
+
+  * Show current user: `GET /user?username=<username>&remember_token=<token>`
 
     Returns the authenticated user's information.
 
@@ -76,3 +80,29 @@ are as follows:
             "remember_token": <big_base64_string>
           }
         }
+
+  * Update account information:
+    `PATCH/PUT /user/update?username=<username>&remember_token=<token>`
+
+    **What about password updates?????**
+
+  * Delete account: `DELETE /user?username=<username>&remember_token=<token>`
+    
+    Delete's the authenticated user's account.
+
+### Secret operations
+
+  * List a user's secrets:
+    `GET /sercrets?username=<username>&remember_token=<token>`
+
+  * Lookup a specific secret:
+    `GET /secret/:key?username=<username>&remember_token=<token>`
+
+  * Store a new secret:
+    `POST /secret?username=<username>&remember_token=<token>`
+
+  * Update a secret:
+    `PATCH/PUT /secret/:key?username=<username>&remember_token=<token>`
+
+  * Delete a secret:
+    `DELETE /secret/:key?username=<username>&remember_token=<token>`
