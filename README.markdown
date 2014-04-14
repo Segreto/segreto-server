@@ -173,7 +173,15 @@ With that done, run the following:
     $ cd segreto-server/
     $ bundle install
 
-and finally start the server with
+Next, you need to generate a large, random string and store it in the 
+`SEGRETO_SECRET_KEY` environment variable, preferably using a `.env` file whose 
+contents should look like this:
+
+    SEGRETO_SECRET_KEY=<some_big_random_string>
+
+The file can then be sourced using ``export `cat .env` ``.
+
+Finally start the server with
 
     $ rails server
 
