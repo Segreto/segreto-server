@@ -68,6 +68,9 @@ are as follows:
 
   * Logout: `GET /user/signout?username=<username>&remember_token=<token>`
 
+    Logs out the current user, invalidating their `remember_token` on the 
+    server.
+
   * Show current user: `GET /user?username=<username>&remember_token=<token>`
 
     Returns the authenticated user's information.
@@ -95,14 +98,58 @@ are as follows:
   * List a user's secrets:
     `GET /sercrets?username=<username>&remember_token=<token>`
 
+    Returns a list of the user's secrets as key-value pairs:
+
+        [
+          {
+            "key": <key>,
+            "value" <value>
+          },
+          ...
+        ]
+
   * Lookup a specific secret:
     `GET /secret/:key?username=<username>&remember_token=<token>`
+
+    Returns the key-value pair owned by the authenticated user matching the 
+    given key.
+
+        {
+          "key": <key>,
+          "value": <value>
+        }
 
   * Store a new secret:
     `POST /secret?username=<username>&remember_token=<token>`
 
+    POST body:
+
+        {
+          "key": <key>,
+          "value": <value>
+        }
+
+    Given a new key-value pair, store them in the authenticated user's 
+    collection of secrets.
+
+    Both the key and value are to be arbitrary strings and will be encrypted at 
+    rest in the Segreto database^[We currently use 
+    [attr_encryptor](https://github.com/danpal/attr_encryptor) for field 
+    encryption.]. For additional security, the official client will also encrypt 
+    the value on the client side with a private key, making the stored values 
+    entirely unknown to the server.
+
   * Update a secret:
     `PATCH/PUT /secret/:key?username=<username>&remember_token=<token>`
 
+    PATCH body:
+
+        { "value": <new-value> }
+
+    Updates the value field of the user's secret matching the given key to 
+    `<new-value>`.
+
   * Delete a secret:
     `DELETE /secret/:key?username=<username>&remember_token=<token>`
+
+    Permanently delete's the user's secret matching the given key.
