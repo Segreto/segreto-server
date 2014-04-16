@@ -39,7 +39,20 @@ class UserController < ApplicationController
 
   # update(username, attr*, val*)
   def update
-    if @user.update(user_params)
+    fields = user_params
+
+    # require old password for changing email or password
+    if fields["email"] || fields["password"]
+      unless @user.authenticate params["old_password"]
+        render(
+          json: { message: "Must supply current password in order to modify email or password."},
+          status: :bad_request
+        ) and return
+      end
+    end
+
+    # update the fields and check for success/validity
+    if @user.update(fields)
       render json: @user, status: :accepted
     else
       fail_validation @user

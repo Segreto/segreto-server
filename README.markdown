@@ -94,7 +94,20 @@ are as follows:
   * Update account information:
     `PATCH/PUT /user/update?username=<username>&remember_token=<token>`
 
-    **What about password updates?????**
+    PATCH/PUT Body:
+
+        {
+          "name": <new_name>,
+          "old_password": <old_password>,
+          "email": <new_email>,
+          "password": <new_password>,
+          "password_confirmation": <new_password_confirmation>
+        }
+
+    Updates the specified fields with the supplied values. When changing the 
+    password or email fields, one must also supply the correct current password.  
+    The username field cannot be changed. On success, the resulting user object 
+    will be returned in the same format as `GET /user` above.
 
   * Delete account: `DELETE /user?username=<username>&remember_token=<token>`
     
