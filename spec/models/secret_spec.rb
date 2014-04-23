@@ -43,6 +43,18 @@ describe Secret do
     it { should_not be_valid }
   end
 
+  describe "when two keys are unique for the same user" do
+    before do
+      secret2 = Secret.create(
+        key: 'a different super sekrit key',
+        value: 'some super sekrit message',
+        user_id: @user.id
+      )
+    end
+
+    it { should be_valid }
+  end
+
   describe "when two users have a secret with the same key" do
     before do
       user2 = User.create(
