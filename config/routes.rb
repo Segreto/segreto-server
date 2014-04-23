@@ -10,10 +10,10 @@ SegretoServer::Application.routes.draw do
 
     get    'secrets'      => 'secret#index',   as: :secrets
     post   'secret'       => 'secret#create',  as: :secret_create
-    get    'secret/:name' => 'secret#show',    as: :secret
-    patch  'secret/:name' => 'secret#update',  as: :secret_update
-    put    'secret/:name' => 'secret#update'
-    delete 'secret/:name' => 'secret#destroy', as: :secret_delete
+    get    'secret/:key'  => 'secret#show',    as: :secret
+    patch  'secret/:key'  => 'secret#update',  as: :secret_update
+    put    'secret/:key'  => 'secret#update'
+    delete 'secret/:key'  => 'secret#destroy', as: :secret_delete
   end
 
   # Example resource route with more complex sub-resources:
