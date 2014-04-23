@@ -7,12 +7,15 @@ class ApplicationController < ActionController::Base
 
   # auth(username, token)
   def auth
-    fail_auth unless params[:username] && params[:remember_token]
-    @user = User.find_by username: params[:username]
-    if !@user ||
-       !@user.remember_token ||
-       (@user.remember_token != params[:remember_token])
+    unless params[:username] && params[:remember_token]
       fail_auth
+    else
+      @user = User.find_by username: params[:username]
+      if !@user ||
+         !@user.remember_token ||
+         (@user.remember_token != params[:remember_token])
+        fail_auth
+      end
     end
   end
 
