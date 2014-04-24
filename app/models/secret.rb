@@ -7,7 +7,7 @@ class Secret < ActiveRecord::Base
   belongs_to :user
 
   def key_must_be_unique_for_user
-    unless user.secrets.select{ |s| s.key == key } == []
+    unless user.secrets.select{ |s| (s.key == key) && (s.id != id) } == []
       errors.add :key, "must be unique per user"
     end
   end
