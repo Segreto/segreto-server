@@ -135,8 +135,10 @@ are as follows:
     given key.
 
         {
-          "key": <key>,
-          "value": <value>
+          "secret": {
+            "key": <key>,
+            "value": <value>
+          }
         }
 
   * Store a new secret:
