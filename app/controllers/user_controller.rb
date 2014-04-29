@@ -23,8 +23,7 @@ class UserController < ApplicationController
     @user = User.find_by username: params[:username]
     if @user && @user.authenticate(params[:password])
       @user.create_token
-      render json: { message: "Hello, #{@user.greet}!",
-                     remember_token: @user.remember_token },
+      render json: { message: "Hello, #{@user.greet}!" }.merge(@user.as_json),
              status: :accepted
     else
       fail_auth

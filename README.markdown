@@ -63,7 +63,12 @@ are as follows:
 
         {
           "message": "Hello, <username>!",
-          "remember_token": <big_base64_string>
+          "user": {
+            "username": <username>,
+            "email": <email>,
+            "name": <name>,
+            "remember_token": <big_base64_string>
+          }
         }
 
     Authentication failure will result in a message indicating that the supplied 
