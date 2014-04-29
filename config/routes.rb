@@ -4,8 +4,8 @@ SegretoServer::Application.routes.draw do
     post   'user'         => 'user#create',  as: :user_create
     get    'user/signin'  => 'user#signin',  as: :user_signin
     get    'user/signout' => 'user#signout', as: :user_signout
-    patch  'user/update'  => 'user#update',  as: :user_update
-    put    'user/update'  => 'user#update'
+    patch  'user'         => 'user#update',  as: :user_update
+    put    'user'         => 'user#update'
     delete 'user'         => 'user#destroy', as: :user_delete
 
     get    'secrets'      => 'secret#index',   as: :secrets

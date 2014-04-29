@@ -97,7 +97,7 @@ are as follows:
         }
 
   * Update account information:
-    `PATCH/PUT /user/update?username=<username>&remember_token=<token>`
+    `PATCH/PUT /user?username=<username>&remember_token=<token>`
 
     PATCH/PUT Body:
 
