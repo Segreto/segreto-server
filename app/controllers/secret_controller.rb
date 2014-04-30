@@ -44,8 +44,8 @@ class SecretController < ApplicationController
   end
 
   def secret_params
-    params.slice(:key, :value)
-      .permit(:key, :value)
+    params.slice(:key, :value, :client_iv)
+      .permit(:key, :value, :client_iv)
       .merge(user_id: @user.id)
   end
 end
