@@ -4,6 +4,7 @@ class Secret < ActiveRecord::Base
   validate :key_must_be_unique_for_user
   attr_encrypted :value, key: ENV['SEGRETO_SECRET_KEY']
   validates :value, presence: true
+  attr_encrypted :client_iv, key: ENV['SEGRETO_SECRET_KEY']
   belongs_to :user
 
   def key_must_be_unique_for_user
@@ -14,7 +15,7 @@ class Secret < ActiveRecord::Base
 
   def as_json options={}
     json = super(options.merge(only: []))
-    decrypted_fields = { key: key, value: value }
+    decrypted_fields = { key: key, value: value, client_iv: client_iv }
     if options[:root]
       json['secret'].merge! decrypted_fields
     else

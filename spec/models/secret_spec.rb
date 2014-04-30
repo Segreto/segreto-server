@@ -20,6 +20,7 @@ describe Secret do
 
   it { should respond_to(:key) }
   it { should respond_to(:value) }
+  it { should respond_to(:client_iv) }
   it { should respond_to(:user_id) }
 
   it { should be_valid }

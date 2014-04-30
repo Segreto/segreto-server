@@ -128,7 +128,8 @@ are as follows:
         [
           {
             "key": <key>,
-            "value" <value>
+            "value": <value>,
+            "client_iv": <client_iv>
           },
           ...
         ]
@@ -142,7 +143,8 @@ are as follows:
         {
           "secret": {
             "key": <key>,
-            "value": <value>
+            "value": <value>,
+            "client_iv": <client_iv>
           }
         }
 
@@ -153,28 +155,36 @@ are as follows:
 
         {
           "key": <key>,
-          "value": <value>
+          "value": <value>,
+          "client_iv": <client_iv>
         }
 
     Given a new key-value pair, store them in the authenticated user's 
     collection of secrets.
 
-    Both the key and value are to be arbitrary strings and will be encrypted at 
+    All three of the fields are to be arbitrary strings and will be encrypted at 
     rest in the Segreto database (We currently use 
     [attr_encryptor](https://github.com/danpal/attr_encryptor) for field 
     encryption.) For additional security, the official client will also encrypt 
     the value on the client side with a private key, making the stored values 
-    entirely unknown to the server.
+    entirely unknown to the server. The client_iv is stored server side so that 
+    the client does not have to maintain a database of its own IVs for every 
+    secret.
 
   * Update a secret:
     `PATCH/PUT /secret/:key?username=<username>&remember_token=<token>`
 
     PATCH body:
 
-        { "value": <new-value> }
+        {
+          "value": <new_value>,
+          "client_iv": <new_client_iv>
+        }
 
     Updates the value field of the user's secret matching the given key to 
-    `<new-value>`.
+    `<new_value>`. If the client has chosen a new IV for the encrypted value, it 
+    can supply the <new_client_iv> value as well. Note that changing the client 
+    IV requires updating the value.
 
   * Delete a secret:
     `DELETE /secret/:key?username=<username>&remember_token=<token>`

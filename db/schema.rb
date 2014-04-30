@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140412020452) do
+ActiveRecord::Schema.define(version: 20140429235044) do
 
   create_table "secrets", force: true do |t|
     t.integer  "user_id"
@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(version: 20140412020452) do
     t.string   "encrypted_value_iv"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "encrypted_client_iv"
+    t.string   "encrypted_client_iv_salt"
+    t.string   "encrypted_client_iv_iv"
   end
 
   create_table "users", force: true do |t|
